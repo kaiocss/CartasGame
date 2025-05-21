@@ -27,7 +27,7 @@ public class GameManager {
             compraJogador1.executar();
             compraJogador2.executar();
 
-            // Verifica se ambos possuem cartas na mão após a compra
+            // Verifica se ainda tem carta na mao depois da compra
             if (jogador1.getMao().isEmpty() || jogador2.getMao().isEmpty()) {
                 break;
             }

@@ -17,6 +17,7 @@ public class EstadoFimDeJogo implements Iniciar {
             System.out.println("\nEmpate! Ambos sem cartas.");
         } else if (!jogador1.temCartas()) {
             System.out.println("\n" + jogador2.getNome() + " venceu a partida!");
+            
         } else {
             System.out.println("\n" + jogador1.getNome() + " venceu a partida!");
         }

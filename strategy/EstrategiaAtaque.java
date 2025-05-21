@@ -21,3 +21,9 @@ public class EstrategiaAtaque implements Comportamento {
         }
     }
 }
+
+
+/*  
+A + A = Maior A vence, menor A perde a carta
+A + D = Maior entre A e D vence, mantém a carta
+D + D = Empate*/
