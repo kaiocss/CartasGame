@@ -72,10 +72,24 @@ public class App {
     private static List<Carta> gerarDeckAleatorio(CartaFactory factory, int qtd) {
         List<Carta> deck = new ArrayList<>();
         java.util.Random random = new java.util.Random();
+
+        String[] nomes = {
+                "Dragao Branco de Olhos Azuis",
+                "Mago Negro",
+                "Caveira Invocada",
+                "Cavaleiro Gaia",
+                "Kuriboh",
+                "Dragao Negro de Olhos Vermelhos",
+                "Exodia",
+                "Arpia",
+                "Soldado do Lustro Negro",
+                "Slifer o Dragao Celeste"
+        };
+
         for (int i = 1; i <= qtd; i++) {
             TipoCarta tipo = random.nextBoolean() ? TipoCarta.ATAQUE : TipoCarta.DEFESA;
             int valor = random.nextInt(10) + 1;
-            String nome = "Carta" + i;
+            String nome = nomes[random.nextInt(nomes.length)] + " #" + i;
             deck.add(factory.criarCarta(nome, tipo, valor));
         }
         return deck;
