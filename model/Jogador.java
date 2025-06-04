@@ -35,7 +35,7 @@ public class Jogador {
         if (!deck.isEmpty()) {
             Carta carta = deck.remove(0);
             mao.add(carta);
-            System.out.println(nome + " comprou uma carta: " + carta.getTipo() + " [" + carta.getValor() + "]");
+            System.out.println(nome + " comprou uma carta: " + carta.getNome() + " - " + carta.getTipo() + " [" + carta.getValor() + "]");
         } else {
             System.out.println(nome + " não tem mais cartas no deck.");
         }

@@ -16,15 +16,18 @@ public class App {
         CartaFactory factory = new CartaFactory();
         GameManager gameManager = GameManager.getInstance();
 
-        // Criando decks
+        // Decks pre-criados aleatoriamente
+        List<Carta> cartasAleatorias = gerarDeckAleatorio(factory, 20);
+
+        // Criando decks dos jogadores
         List<Carta> deck1 = new ArrayList<>();
         List<Carta> deck2 = new ArrayList<>();
 
         System.out.println("=== Criação do Deck Jogador 1 ===");
-        criarDeck(scanner, factory, deck1);
+        escolherOuCriarDeck(scanner, factory, deck1, cartasAleatorias);
 
         System.out.println("\n=== Criação do Deck Jogador 2 ===");
-        criarDeck(scanner, factory, deck2);
+        escolherOuCriarDeck(scanner, factory, deck2, cartasAleatorias);
 
         // Criando jogadores
         Jogador jogador1 = new Jogador("Jogador 1", deck1);
@@ -42,14 +45,45 @@ public class App {
         int qtd = scanner.nextInt();
 
         for (int i = 0; i < qtd; i++) {
-            System.out.println("Carta " + (i + 1) + ": Tipo (A = Ataque / D = Defesa)");
+            System.out.println("Carta " + (i + 1) + ": Nome:");
+            String nome = scanner.next();
+
+            System.out.println("Tipo (A = Ataque / D = Defesa)");
             String tipo = scanner.next();
 
             System.out.println("Valor da carta:");
             int valor = scanner.nextInt();
 
             TipoCarta tipoCarta = tipo.equalsIgnoreCase("A") ? TipoCarta.ATAQUE : TipoCarta.DEFESA;
-            deck.add(factory.criarCarta(tipoCarta, valor));
+            deck.add(factory.criarCarta(nome, tipoCarta, valor));
+        }
+    }
+
+    private static void escolherOuCriarDeck(Scanner scanner, CartaFactory factory, List<Carta> deck, List<Carta> cartasPreCriadas) {
+        System.out.println("Deseja usar o deck aleatório pré-criado? (S/N)");
+        String escolha = scanner.next();
+        if (escolha.equalsIgnoreCase("S")) {
+            copiarDeck(cartasPreCriadas, deck, factory);
+        } else {
+            criarDeck(scanner, factory, deck);
+        }
+    }
+
+    private static List<Carta> gerarDeckAleatorio(CartaFactory factory, int qtd) {
+        List<Carta> deck = new ArrayList<>();
+        java.util.Random random = new java.util.Random();
+        for (int i = 1; i <= qtd; i++) {
+            TipoCarta tipo = random.nextBoolean() ? TipoCarta.ATAQUE : TipoCarta.DEFESA;
+            int valor = random.nextInt(10) + 1;
+            String nome = "Carta" + i;
+            deck.add(factory.criarCarta(nome, tipo, valor));
+        }
+        return deck;
+    }
+
+    private static void copiarDeck(List<Carta> origem, List<Carta> destino, CartaFactory factory) {
+        for (Carta c : origem) {
+            destino.add(factory.criarCarta(c.getNome(), c.getTipo(), c.getValor()));
         }
     }
 }
