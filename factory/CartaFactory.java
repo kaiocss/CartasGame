@@ -8,11 +8,11 @@ public class CartaFactory {
     private static final Comportamento ATAQUE = new EstrategiaAtaque();
     private static final Comportamento DEFESA = new EstrategiaDefesa();
 
-    public Carta criarCarta(TipoCarta tipo, int valor) {
+    public Carta criarCarta(String nome, TipoCarta tipo, int valor) {
         if (tipo == TipoCarta.ATAQUE) {
-            return new Carta(tipo, valor, ATAQUE);
+            return new Carta(nome, tipo, valor, ATAQUE);
         } else {
-            return new Carta(tipo, valor, DEFESA);
+            return new Carta(nome, tipo, valor, DEFESA);
         }
     }
 }

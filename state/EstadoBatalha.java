@@ -22,8 +22,8 @@ public class EstadoBatalha implements Iniciar {
         Carta carta1 = jogador1.jogarCarta(0);
         Carta carta2 = jogador2.jogarCarta(0);
 
-        System.out.println("\n" + jogador1.getNome() + " jogou: " + carta1.getTipo() + " [" + carta1.getValor() + "]");
-        System.out.println(jogador2.getNome() + " jogou: " + carta2.getTipo() + " [" + carta2.getValor() + "]");
+        System.out.println("\n" + jogador1.getNome() + " jogou: " + carta1.getNome() + " - " + carta1.getTipo() + " [" + carta1.getValor() + "]");
+        System.out.println(jogador2.getNome() + " jogou: " + carta2.getNome() + " - " + carta2.getTipo() + " [" + carta2.getValor() + "]");
 
         String resultado1 = carta1.executar(carta2);
         String resultado2 = carta2.executar(carta1);
