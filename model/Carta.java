@@ -17,6 +17,10 @@ public class Carta {
         return tipo;
     }
 
+    public Comportamento getComportamento() {
+        return comportamento;
+    }
+
     public int getValor() {
         return valor;
     }
