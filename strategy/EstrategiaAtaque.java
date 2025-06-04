@@ -8,7 +8,7 @@ public class EstrategiaAtaque implements Comportamento {
     public String executar(Carta carta, Carta outra) {
         if (outra.getTipo() == TipoCarta.ATAQUE) {
             if (carta.getValor() > outra.getValor()) {
-                return "Carta de Ataque venceu! Defesa perde a carta.";
+                return "Carta de Ataque venceu! Oponente perde a carta.";
             } else  {
                 return "Carta de Ataque perdeu! Perde a carta.";
             }
