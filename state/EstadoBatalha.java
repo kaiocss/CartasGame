@@ -2,6 +2,7 @@ package state;
 
 import model.Carta;
 import model.Jogador;
+import model.TipoCarta;
 
 public class EstadoBatalha implements Iniciar {
     private Jogador jogador1;
@@ -30,5 +31,38 @@ public class EstadoBatalha implements Iniciar {
 
         System.out.println("Resultado " + jogador1.getNome() + ": " + resultado1);
         System.out.println("Resultado " + jogador2.getNome() + ": " + resultado2);
+
+        aplicarDano(carta1, carta2);
+    }
+
+    private void aplicarDano(Carta carta1, Carta carta2) {
+        int danoJogador1 = 0;
+        int danoJogador2 = 0;
+
+        if (carta1.getTipo() == TipoCarta.ATAQUE && carta2.getTipo() == TipoCarta.ATAQUE) {
+            if (carta1.getValor() > carta2.getValor()) {
+                danoJogador2 = carta1.getValor() - carta2.getValor();
+            } else if (carta2.getValor() > carta1.getValor()) {
+                danoJogador1 = carta2.getValor() - carta1.getValor();
+            }
+        } else if (carta1.getTipo() == TipoCarta.ATAQUE && carta2.getTipo() == TipoCarta.DEFESA) {
+            if (carta1.getValor() > carta2.getValor()) {
+                danoJogador2 = carta1.getValor() - carta2.getValor();
+            }
+        } else if (carta1.getTipo() == TipoCarta.DEFESA && carta2.getTipo() == TipoCarta.ATAQUE) {
+            if (carta2.getValor() > carta1.getValor()) {
+                danoJogador1 = carta2.getValor() - carta1.getValor();
+            }
+        }
+
+        if (danoJogador1 > 0) {
+            System.out.println(jogador1.getNome() + " recebeu " + danoJogador1 + " de dano!");
+            jogador1.perderVida(danoJogador1);
+        }
+
+        if (danoJogador2 > 0) {
+            System.out.println(jogador2.getNome() + " recebeu " + danoJogador2 + " de dano!");
+            jogador2.perderVida(danoJogador2);
+        }
     }
 }

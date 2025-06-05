@@ -23,7 +23,8 @@ public class GameManager {
         Scanner scanner = new Scanner(System.in);
         int rodada = 1;
 
-        while (jogador1.temCartas() && jogador2.temCartas()) {
+        while (jogador1.temCartas() && jogador2.temCartas() &&
+               jogador1.getPontosDeVida() > 0 && jogador2.getPontosDeVida() > 0) {
             System.out.println("\n=== Rodada " + rodada + " - Compra de Cartas ===");
 
             // Estado de Compra
@@ -44,6 +45,10 @@ public class GameManager {
             System.out.println("\n=== Rodada " + rodada + " - Batalha ===");
             Iniciar batalha = new EstadoBatalha(jogador1, jogador2);
             batalha.executar();
+
+            if (jogador1.getPontosDeVida() <= 0 || jogador2.getPontosDeVida() <= 0) {
+                break;
+            }
 
             System.out.println("\nPressione Enter para prosseguir para a próxima rodada...");
             scanner.nextLine();

@@ -13,11 +13,13 @@ public class EstadoFimDeJogo implements Iniciar {
 
     @Override
     public void executar() {
-        if (!jogador1.temCartas() && !jogador2.temCartas()) {
-            System.out.println("\nEmpate! Ambos sem cartas.");
-        } else if (!jogador1.temCartas()) {
+        boolean j1Derrotado = jogador1.getPontosDeVida() <= 0 || !jogador1.temCartas();
+        boolean j2Derrotado = jogador2.getPontosDeVida() <= 0 || !jogador2.temCartas();
+
+        if (j1Derrotado && j2Derrotado) {
+            System.out.println("\nEmpate! Ambos foram derrotados.");
+        } else if (j1Derrotado) {
             System.out.println("\n" + jogador2.getNome() + " venceu a partida!");
-            
         } else {
             System.out.println("\n" + jogador1.getNome() + " venceu a partida!");
         }
