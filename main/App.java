@@ -4,6 +4,7 @@ import factory.CartaFactory;
 import model.Carta;
 import model.Jogador;
 import model.TipoCarta;
+import observer.ConsoleVidaObserver;
 import singleton.GameManager;
 
 import java.util.ArrayList;
@@ -32,6 +33,10 @@ public class App {
         // Criando jogadores
         Jogador jogador1 = new Jogador("Jogador 1", deck1);
         Jogador jogador2 = new Jogador("Jogador 2", deck2);
+
+        ConsoleVidaObserver vidaObserver = new ConsoleVidaObserver();
+        jogador1.adicionarObservador(vidaObserver);
+        jogador2.adicionarObservador(vidaObserver);
 
         jogador1.embaralharDeck();
         jogador2.embaralharDeck();

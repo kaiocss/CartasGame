@@ -1,18 +1,24 @@
 package model;
 
+import observer.VidaObserver;
+import observer.VidaSubject;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Jogador {
+public class Jogador implements VidaSubject {
     private String nome;
     private List<Carta> deck;
     private List<Carta> mao;
+    private int pontosDeVida = 200;
+    private List<VidaObserver> observers = new ArrayList<>();
 
     public Jogador(String nome, List<Carta> deckInicial) {
         this.nome = nome;
         this.deck = new ArrayList<>(deckInicial);
         this.mao = new ArrayList<>();
+        notificarObservadores();
     }
 
     public String getNome() {
@@ -55,6 +61,36 @@ public class Jogador {
             Carta temp = deck.get(i);
             deck.set(i, deck.get(j));
             deck.set(j, temp);
+        }
+    }
+
+    public int getPontosDeVida() {
+        return pontosDeVida;
+    }
+
+    public void perderVida(int dano) {
+        pontosDeVida -= dano;
+        if (pontosDeVida < 0) {
+            pontosDeVida = 0;
+        }
+        notificarObservadores();
+    }
+
+    @Override
+    public void adicionarObservador(VidaObserver observer) {
+        observers.add(observer);
+        observer.atualizar(this);
+    }
+
+    @Override
+    public void removerObservador(VidaObserver observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notificarObservadores() {
+        for (VidaObserver o : observers) {
+            o.atualizar(this);
         }
     }
 }
