@@ -40,18 +40,21 @@ public class EstadoBatalha implements Iniciar {
         int danoJogador2 = 0;
 
         if (carta1.getTipo() == TipoCarta.ATAQUE && carta2.getTipo() == TipoCarta.ATAQUE) {
-            if (carta1.getValor() > carta2.getValor()) {
-                danoJogador2 = carta1.getValor() - carta2.getValor();
-            } else if (carta2.getValor() > carta1.getValor()) {
-                danoJogador1 = carta2.getValor() - carta1.getValor();
+            int diff = carta1.getValor() - carta2.getValor();
+            if (diff > 0) {
+                danoJogador2 = diff;
+            } else if (diff < 0) {
+                danoJogador1 = -diff;
             }
         } else if (carta1.getTipo() == TipoCarta.ATAQUE && carta2.getTipo() == TipoCarta.DEFESA) {
-            if (carta1.getValor() > carta2.getValor()) {
-                danoJogador2 = carta1.getValor() - carta2.getValor();
+            int diff = carta1.getValor() - carta2.getValor();
+            if (diff < 0) {
+                danoJogador1 = -diff;
             }
         } else if (carta1.getTipo() == TipoCarta.DEFESA && carta2.getTipo() == TipoCarta.ATAQUE) {
-            if (carta2.getValor() > carta1.getValor()) {
-                danoJogador1 = carta2.getValor() - carta1.getValor();
+            int diff = carta2.getValor() - carta1.getValor();
+            if (diff < 0) {
+                danoJogador2 = -diff;
             }
         }
 
